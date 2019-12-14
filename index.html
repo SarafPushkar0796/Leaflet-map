@@ -52,7 +52,7 @@
         if(navigator.geolocation){
 
           navigator.geolocation.getCurrentPosition(function(location) {
-            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+            let latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
             // Directions
             L.Routing.control({
@@ -62,15 +62,15 @@
                 ],
                 routeWhileDragging: false
             }).addTo(map);
-          });
-          
-          // Marker - User location
-          var markerUser = L.marker(latlng).addTo(map);
-          markerUser.bindPopup('<b>You are here.</b>')
 
-          // Marker - Mahalaxmi Pay and Park
-          var marker = L.marker([16.694165, 74.223050]).addTo(map);
-          marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
+            // Marker - User location
+            var markerUser = L.marker(latlng).addTo(map);
+            markerUser.bindPopup('<b>You are here.</b>');
+
+            // Marker - Mahalaxmi Pay and Park
+            var marker = L.marker([16.694165, 74.223050]).addTo(map);
+            marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
+          });
       } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
       }
