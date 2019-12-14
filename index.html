@@ -30,87 +30,8 @@
   </head>
   <body>
     <div id="map"></div>
-    <p id="data"></p>
 
-    <p><a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a></p>
     <script type="text/javascript">
-
-      // Get user location
-      lat = 0;
-      lon = 0;
-      var start = [,];
-
-      // Get 'live' location
-      // var x = document.getElementById("data");
-
-      // function getLocation() {
-      //   if (navigator.geolocation) {
-      //     handlePermission();
-      //     navigator.geolocation.getCurrentPosition(showPosition, showError);
-      //   } else { 
-      //     x.innerHTML = "Geolocation is not supported by this browser.";
-      //   }
-      // }
-
-      // function handlePermission() {
-      //   navigator.permissions.query({name:'geolocation'}).then(function(result) {
-      //     if (result.state == 'granted') {
-      //       report(result.state);
-      //       geoBtn.style.display = 'none';
-      //     } else if (result.state == 'prompt') {
-      //       report(result.state);
-      //       geoBtn.style.display = 'none';
-      //       navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
-      //     } else if (result.state == 'denied') {
-      //       report(result.state);
-      //       geoBtn.style.display = 'inline';
-      //     }
-      //     result.onchange = function() {
-      //       report(result.state);
-      //     }
-      //   });
-      // }
-
-      // function report(state) {
-      //   console.log('Permission ' + state);
-      // }
-
-      // function showPosition(position) {
-      //   x.innerHTML = "Latitude: " + position.coords.latitude + 
-      //   "<br>Longitude: " + position.coords.longitude;
-
-      //   lat = position.coords.latitude;
-      //   lon = position.coords.longitude;
-
-      //   // start coord i.e current location
-      //   start = [lat,lon];
-      //   console.log(start);
-
-      //     L.Routing.control({
-      //       waypoints: [
-      //           L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
-      //           L.latLng(19.7514798, 75.7138884) // set to user location
-      //       ],
-      //       routeWhileDragging: false
-      //   }).addTo(map);
-      // }
-
-      // function showError(error) {
-      //   switch(error.code) {
-      //     case error.PERMISSION_DENIED:
-      //       x.innerHTML = "User denied the request for Geolocation."
-      //       break;
-      //     case error.POSITION_UNAVAILABLE:
-      //       x.innerHTML = "Location information is unavailable."
-      //       break;
-      //     case error.TIMEOUT:
-      //       x.innerHTML = "The request to get user location timed out."
-      //       break;
-      //     case error.UNKNOWN_ERROR:
-      //       x.innerHTML = "An unknown error occurred."
-      //       break;
-      //   }
-      // }
 
       // Leaflet start
       // Kolhapur coords
