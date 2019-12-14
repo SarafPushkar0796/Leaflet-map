@@ -28,10 +28,14 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="getLocation();">
     <div id="map"></div>
+    <p id="data"></p>
 
     <script type="text/javascript">
+
+      // Get 'live' location
+      var x = document.getElementById("data");
 
       // Leaflet start
       // Kolhapur coords
@@ -44,26 +48,33 @@
       }).addTo(map);
 
       // Leaflet getLocation
-      navigator.geolocation.getCurrentPosition(function(location) {
-        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+      function getLocation(){
+        if(navigator.geolocation){
 
-        // Marker - User location
-        var markerUser = L.marker(latlng).addTo(map);
-        markerUser.bindPopup('<b>You are here.</b>')
+          navigator.geolocation.getCurrentPosition(function(location) {
+            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
-        // Marker - Mahalaxmi Pay and Park
-        var marker = L.marker([16.694165, 74.223050]).addTo(map);
-        marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
+            // Marker - User location
+            var markerUser = L.marker(latlng).addTo(map);
+            markerUser.bindPopup('<b>You are here.</b>')
 
-        // Directions
-        L.Routing.control({
-            waypoints: [
-                L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
-                L.latLng(latlng) // set to user location
-            ],
-            routeWhileDragging: false
-        }).addTo(map);
-      });
+            // Marker - Mahalaxmi Pay and Park
+            var marker = L.marker([16.694165, 74.223050]).addTo(map);
+            marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
+
+            // Directions
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
+                    L.latLng(latlng) // set to user location
+                ],
+                routeWhileDragging: false
+            }).addTo(map);
+          });
+      } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
     </script>
   </body>
 </html>
