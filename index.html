@@ -28,7 +28,7 @@
       }
     </style>
   </head>
-  <body onload="getLocation();">
+  <body>
     <div id="map"></div>
     <p id="data"></p>
 
@@ -41,106 +41,108 @@
       var start = [,];
 
       // Get 'live' location
-      var x = document.getElementById("data");
+      // var x = document.getElementById("data");
 
-      function getLocation() {
-        if (navigator.geolocation) {
-          handlePermission();
-          navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else { 
-          x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-      }
+      // function getLocation() {
+      //   if (navigator.geolocation) {
+      //     handlePermission();
+      //     navigator.geolocation.getCurrentPosition(showPosition, showError);
+      //   } else { 
+      //     x.innerHTML = "Geolocation is not supported by this browser.";
+      //   }
+      // }
 
-      function handlePermission() {
-        navigator.permissions.query({name:'geolocation'}).then(function(result) {
-          if (result.state == 'granted') {
-            report(result.state);
-            geoBtn.style.display = 'none';
-          } else if (result.state == 'prompt') {
-            report(result.state);
-            geoBtn.style.display = 'none';
-            navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
-          } else if (result.state == 'denied') {
-            report(result.state);
-            geoBtn.style.display = 'inline';
-          }
-          result.onchange = function() {
-            report(result.state);
-          }
-        });
-      }
+      // function handlePermission() {
+      //   navigator.permissions.query({name:'geolocation'}).then(function(result) {
+      //     if (result.state == 'granted') {
+      //       report(result.state);
+      //       geoBtn.style.display = 'none';
+      //     } else if (result.state == 'prompt') {
+      //       report(result.state);
+      //       geoBtn.style.display = 'none';
+      //       navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
+      //     } else if (result.state == 'denied') {
+      //       report(result.state);
+      //       geoBtn.style.display = 'inline';
+      //     }
+      //     result.onchange = function() {
+      //       report(result.state);
+      //     }
+      //   });
+      // }
 
-      function report(state) {
-        console.log('Permission ' + state);
-      }
+      // function report(state) {
+      //   console.log('Permission ' + state);
+      // }
 
-      function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;
+      // function showPosition(position) {
+      //   x.innerHTML = "Latitude: " + position.coords.latitude + 
+      //   "<br>Longitude: " + position.coords.longitude;
 
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
+      //   lat = position.coords.latitude;
+      //   lon = position.coords.longitude;
 
-        // start coord i.e current location
-        start = [lat,lon];
-        console.log(start);
+      //   // start coord i.e current location
+      //   start = [lat,lon];
+      //   console.log(start);
 
-          L.Routing.control({
-            waypoints: [
-                L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
-                L.latLng(19.7514798, 75.7138884) // set to user location
-            ],
-            routeWhileDragging: false
-        }).addTo(map);
-      }
+      //     L.Routing.control({
+      //       waypoints: [
+      //           L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
+      //           L.latLng(19.7514798, 75.7138884) // set to user location
+      //       ],
+      //       routeWhileDragging: false
+      //   }).addTo(map);
+      // }
 
-      function showError(error) {
-        switch(error.code) {
-          case error.PERMISSION_DENIED:
-            x.innerHTML = "User denied the request for Geolocation."
-            break;
-          case error.POSITION_UNAVAILABLE:
-            x.innerHTML = "Location information is unavailable."
-            break;
-          case error.TIMEOUT:
-            x.innerHTML = "The request to get user location timed out."
-            break;
-          case error.UNKNOWN_ERROR:
-            x.innerHTML = "An unknown error occurred."
-            break;
-        }
-      }
+      // function showError(error) {
+      //   switch(error.code) {
+      //     case error.PERMISSION_DENIED:
+      //       x.innerHTML = "User denied the request for Geolocation."
+      //       break;
+      //     case error.POSITION_UNAVAILABLE:
+      //       x.innerHTML = "Location information is unavailable."
+      //       break;
+      //     case error.TIMEOUT:
+      //       x.innerHTML = "The request to get user location timed out."
+      //       break;
+      //     case error.UNKNOWN_ERROR:
+      //       x.innerHTML = "An unknown error occurred."
+      //       break;
+      //   }
+      // }
 
       // Leaflet start
       // Kolhapur coords
       var map = L.map('map').setView([16.694590, 74.223053], 16);
+
       var gl = L.mapboxGL({
         attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>',
         accessToken: 'not-needed',
         style: 'https://api.maptiler.com/maps/streets/style.json?key=uFFSx26tKBnj0wOYp9TH'
       }).addTo(map);
 
-      // Marker - User location
-      // var markerUser = L.marker([19.7514798, -75.7138884]).addTo(map);
+      // Leaflet getLocation
+      navigator.geolocation.getCurrentPosition(function(location) {
+        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
-      // Marker - Mahalaxmi Pay and Park
-      var marker = L.marker([16.694165, 74.223050]).addTo(map);
+        // Marker - User location
+        var markerUser = L.marker(latlng).addTo(map);
+        markerUser.bindPopup('<b>You are here.</b>')
 
-      // Marker popup message
-      // marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
-      // markerUser.bindPopup('<b>You are here.</b>').openPopup();
+        // Marker - Mahalaxmi Pay and Park
+        var marker = L.marker([16.694165, 74.223050]).addTo(map);
+        marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
 
-      // L.Routing.control({
-      //     waypoints: [
-      //         L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
-      //         L.latLng(lat, lon) // set to user location
-      //     ],
-      //     routeWhileDragging: false
-      // }).addTo(map);
-
-      marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
-
+        // Directions
+        L.Routing.control({
+            waypoints: [
+                L.latLng(16.694165, 74.223050), // mahalaxmi pay and park
+                L.latLng(latlng) // set to user location
+            ],
+            routeWhileDragging: false
+        }).addTo(map);
+      });
     </script>
   </body>
 </html>
