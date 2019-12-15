@@ -72,7 +72,7 @@
             marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
             
             // Marker - KMC Parking 2
-            var marker2 = L.marker([16.694518,74.226798]).addTo(map);
+            var marker = L.marker([16.694518,74.226798]).addTo(map);
             marker.bindPopup('<b>KMC Parking 2</b>');
             
             marker.click(function(){
@@ -86,12 +86,12 @@
               }).addTo(map);
             })
 
-            marker2.click(function(){
+            marker.click(function(){
               // Directions
               L.Routing.control({
                   waypoints: [
                       L.latLng(latlng), // set to user location
-                      L.latLng(16.694518,74.226798) // mahalaxmi pay and park
+                      L.latLng(16.694518,74.226798) // KMC Parking 2
                   ],
                   routeWhileDragging: false
               }).addTo(map);
