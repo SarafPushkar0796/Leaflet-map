@@ -53,15 +53,6 @@
             navigator.geolocation.getCurrentPosition(function(location) {
               let latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
-  //             // Directions
-  //             L.Routing.control({
-  //                 waypoints: [
-  //                     L.latLng(latlng), // set to user location
-  //                     L.latLng(16.694165, 74.223050) // mahalaxmi pay and park
-  //                 ],
-  //                 routeWhileDragging: false
-  //             }).addTo(map);
-
               // Marker - User location
               var markerUser = L.marker(latlng).addTo(map);
               markerUser.bindPopup('<b>You are here.</b>').openPopup();
