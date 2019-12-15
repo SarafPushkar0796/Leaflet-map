@@ -67,14 +67,7 @@
               markerUser.bindPopup('<b>You are here.</b>').openPopup();
 
               // Marker - Mahalaxmi Pay and Park
-              var marker = L.marker([16.694165, 74.223050]).addTo(map);
-              marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
-
-              // Marker - KMC Parking 2
-              var marker = L.marker([16.694518,74.226798]).addTo(map);
-              marker.bindPopup('<b>KMC Parking 2</b>');
-
-              marker.onclick = function(){
+              var marker = L.marker([16.694165, 74.223050]).addTo(map).on('click', function(){
                 // Directions
                 L.Routing.control({
                     waypoints: [
@@ -83,9 +76,11 @@
                     ],
                     routeWhileDragging: false
                 }).addTo(map);
-              }
+              });
+              marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
 
-              marker.onclick = function(){
+              // Marker - KMC Parking 2
+              var marker = L.marker([16.694518,74.226798]).addTo(map).on('click', function(){
                 // Directions
                 L.Routing.control({
                     waypoints: [
@@ -94,7 +89,8 @@
                     ],
                     routeWhileDragging: false
                 }).addTo(map);
-              }
+              });
+              marker.bindPopup('<b>KMC Parking 2</b>');
             });
         } else { 
           x.innerHTML = "Geolocation is not supported by this browser.";
