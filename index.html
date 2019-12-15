@@ -33,8 +33,6 @@
     <p id="data"></p>
 
     <script type="text/javascript">
-      $(document).ready(function(){
-
         // Get 'live' location
         var x = document.getElementById("data");
 
@@ -76,7 +74,7 @@
               var marker = L.marker([16.694518,74.226798]).addTo(map);
               marker.bindPopup('<b>KMC Parking 2</b>');
 
-              marker.click(function(){
+              marker.onclick = function(){
                 // Directions
                 L.Routing.control({
                     waypoints: [
@@ -85,9 +83,9 @@
                     ],
                     routeWhileDragging: false
                 }).addTo(map);
-              })
+              }
 
-              marker.click(function(){
+              marker.onclick = function(){
                 // Directions
                 L.Routing.control({
                     waypoints: [
@@ -96,13 +94,12 @@
                     ],
                     routeWhileDragging: false
                 }).addTo(map);
-              })
+              }
             });
         } else { 
           x.innerHTML = "Geolocation is not supported by this browser.";
         }
       }
-      })
     </script>
   </body>
 </html>
