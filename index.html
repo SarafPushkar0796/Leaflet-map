@@ -72,8 +72,30 @@
             marker.bindPopup('<b>Mahalaxmi Pay and Park</b>');
             
             // Marker - KMC Parking 2
-            var marker = L.marker([16.694518,74.226798]).addTo(map);
+            var marker2 = L.marker([16.694518,74.226798]).addTo(map);
             marker.bindPopup('<b>KMC Parking 2</b>');
+            
+            marker.click(function(){
+              // Directions
+              L.Routing.control({
+                  waypoints: [
+                      L.latLng(latlng), // set to user location
+                      L.latLng(16.694165, 74.223050) // mahalaxmi pay and park
+                  ],
+                  routeWhileDragging: false
+              }).addTo(map);
+            })
+
+            marker2.click(function(){
+              // Directions
+              L.Routing.control({
+                  waypoints: [
+                      L.latLng(latlng), // set to user location
+                      L.latLng(16.694518,74.226798) // mahalaxmi pay and park
+                  ],
+                  routeWhileDragging: false
+              }).addTo(map);
+            })
           });
       } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
