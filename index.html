@@ -28,7 +28,7 @@
       }
     </style>
   </head>
-  <body onload="getLocation();">
+  <body>
     <div id="map"></div>
     <p id="data"></p>
 
@@ -45,30 +45,14 @@
           accessToken: 'not-needed',
           style: 'https://api.maptiler.com/maps/streets/style.json?key=uFFSx26tKBnj0wOYp9TH'
         }).addTo(map);
+      
+        // Marker - Mahalaxmi Pay and Park
+        var marker = L.marker([16.694165, 74.223050]).addTo(map);
+        marker.bindPopup('<b>Ambabai Mandir Parking Lot</b><br/><a href="https://goo.gl/maps/BgrkGMZru25wxJ457" alt="Ambabai Mandir parking directions">Get directions.</a>');
 
-        // Leaflet getLocation
-        function getLocation(){
-          if(navigator.geolocation){
-
-            navigator.geolocation.getCurrentPosition(function(location) {
-              let latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-
-              // Marker - User location
-              var markerUser = L.marker(latlng).addTo(map);
-              markerUser.bindPopup('<b>You are here.</b>').openPopup();
-
-              // Marker - Mahalaxmi Pay and Park
-              var marker = L.marker([16.694165, 74.223050]).addTo(map);
-              marker.bindPopup('<b>Ambabai Mandir Parking Lot</b><br/><a href="https://goo.gl/maps/BgrkGMZru25wxJ457" alt="Ambabai Mandir parking directions">Get directions.</a>');
-
-              // Marker - KMC Parking 2
-              var marker = L.marker([16.694518,74.226798]).addTo(map);
-              marker.bindPopup('<b>KMC Parking 2</b>');
-            });
-        } else { 
-          x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-      }
+        // Marker - KMC Parking 2
+        var marker = L.marker([16.694518,74.226798]).addTo(map);
+        marker.bindPopup('<b>KMC Parking 2 (Bindu Chowk Parking Lot)</b><br/><a href="https://goo.gl/maps/YCmM7iVapEg1TEPD6" alt="KMC Parking 2">Get Directions</a>');
     </script>
   </body>
 </html>
