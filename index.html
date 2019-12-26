@@ -21,7 +21,6 @@
 
       #map {
         position: absolute;
-        top: 70px;
         bottom: 0;
         height: auto;
         width: 100%;
@@ -30,11 +29,34 @@
   </head>
   <body>
     <div id="map"></div>
-    <p id="data"></p>
 
     <script type="text/javascript">
-        // Get 'live' location
-        var x = document.getElementById("data");
+        function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else { 
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
+      
+      function showPosition(position) {console.log(position.coords.latitude + ',' + position.coords.longitude);}
+
+      function showError(error) {
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            console.log("User denied the request for Geolocation.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            console.log("Location information is unavailable.");
+            break;
+          case error.TIMEOUT:
+            console.log("The request to get user location timed out.");
+            break;
+          case error.UNKNOWN_ERROR:
+            console.log("An unknown error occurred.");
+            break;
+        }
+      }
 
         // Leaflet start
         // Kolhapur coords
